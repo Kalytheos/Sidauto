@@ -626,9 +626,10 @@ section {
 
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
   gap: 30px;
   margin-top: 40px;
+  justify-content: center; /* Centrar las tarjetas */
 }
 
 .book-card {
@@ -838,8 +839,9 @@ footer {
   }
   
   .books-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 240px));
     gap: 20px;
+    justify-content: center; /* Centrar en móviles también */
   }
   
   /* Responsive para búsqueda */
@@ -923,5 +925,33 @@ footer {
   .btn-3d {
     padding: 12px 25px;
     font-size: 1rem;
+  }
+}
+
+/* Media query para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .books-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .book-card {
+    max-width: 200px; /* Limitar ancho máximo */
+  }
+}
+
+/* Media query para pantallas extra pequeñas */
+@media (max-width: 360px) {
+  .books-grid {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+    margin: 40px auto 0;
+    justify-items: center;
+  }
+  
+  .book-card {
+    width: 100%;
+    max-width: 280px;
   }
 }
