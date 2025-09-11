@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIDAUTO BIBLIOTECA - Biblioteca Comunitaria</title>
+    
+    <!-- Favicons para máxima compatibilidad -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/libro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/libro.png">
+    <link rel="shortcut icon" href="assets/libro.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/libro.png">
+    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <h1 class="nav-logo">SIDAUTO BIBLIOTECA</h1>
+          <ul class="nav-menu">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#proyecto">Proyecto 3D</a></li>
+            <li><a href="#biblioteca">Biblioteca Virtual</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Sección Hero -->
+      <section id="inicio" class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">SIDAUTO BIBLIOTECA</h1>
+          <p class="hero-subtitle">Tu espacio de conocimiento y aprendizaje en el corazón de Bogotá</p>
+          <div class="hero-info">
+            <div class="location">
+              <h3>📍 Nuestra Ubicación</h3>
+              <p>Calle 93 # 89a-27 Plan<br>Bogotá, Cundinamarca</p>
+            </div>
+            <div class="description">
+              <p>Descubre un mundo de posibilidades en nuestra biblioteca comunitaria. Ofrecemos un espacio acogedor para el estudio, la lectura y el crecimiento personal. Con una amplia colección de libros y recursos digitales, SIDAUTO BIBLIOTECA es tu puerta de entrada al conocimiento.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Proyecto 3D -->
+      <section id="proyecto" class="project-section">
+        <div class="container">
+          <h2>Conoce Nuestro Espacio</h2>
+          <p>Explora nuestras instalaciones en este recorrido virtual 3D</p>
+          
+          <!-- Solución alternativa: Vista previa con enlace directo -->
+          <div class="planner5d-preview">
+            <div class="preview-card">
+              <div class="preview-image">
+                <img src="assets/2025-09-10-194831_hyprshot.png" alt="Vista previa SIDAUTO BIBLIOTECA" />
+                <div class="preview-overlay">
+                  <div class="play-button">
+                    <span>🏢</span>
+                  </div>
+                  <p>Hacer clic para ver el recorrido completo</p>
+                </div>
+              </div>
+              <div class="preview-content">
+                <h3>Recorrido Virtual 3D</h3>
+                <p>Explora cada rincón de nuestra biblioteca con esta experiencia inmersiva creada en Planner5D</p>
+                <div class="preview-features">
+                  <span class="feature">📚 Áreas de lectura</span>
+                  <span class="feature">💻 Zona digital</span>
+                  <span class="feature">👥 Espacios colaborativos</span>
+                  <span class="feature">🔍 Vista 360°</span>
+                </div>
+                <a href="https://planner5d.onelink.me/stDT/lfqcl8l2" target="_blank" class="btn-3d">
+                  � Abrir Recorrido Virtual
+                </a>
+              </div>
+            </div>
+            
+            <!-- Información adicional -->
+            <div class="planner5d-info">
+              <div class="info-box">
+                <h4>💡 ¿Por qué no se muestra aquí directamente?</h4>
+                <p>Por razones de seguridad, Planner5D no permite que sus proyectos se muestren directamente dentro de otras páginas web. ¡Pero no te preocupes! El recorrido completo está disponible en una nueva ventana.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Biblioteca Virtual -->
+      <section id="biblioteca" class="library-section">
+        <div class="container">
+          <h2>Biblioteca Virtual</h2>
+          <p>Explora nuestra colección digital de libros</p>
+          <div class="books-grid" id="booksGrid">
+            <div class="loading">Cargando libros...</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 SIDAUTO BIBLIOTECA. Un espacio para el conocimiento y la comunidad.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

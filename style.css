@@ -1,0 +1,462 @@
+/* Reset y configuración base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navegación */
+.navbar {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.nav-logo {
+  color: #ecf0f1;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-menu a {
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-menu a:hover {
+  color: #3498db;
+}
+
+/* Sección Hero */
+.hero {
+  background: linear-gradient(rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23e74c3c;stop-opacity:0.1" /><stop offset="100%" style="stop-color:%233498db;stop-opacity:0.1" /></linearGradient></defs><rect width="1000" height="300" fill="url(%23grad1)" /></svg>');
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 70px;
+  color: white;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  letter-spacing: 2px;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+.hero-info {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  text-align: left;
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.location h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #3498db;
+}
+
+.location p {
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.description p {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Secciones */
+section {
+  padding: 80px 0;
+}
+
+.project-section {
+  background: white;
+}
+
+.project-section h2,
+.library-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.project-section p,
+.library-section p {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #7f8c8d;
+}
+
+/* Solución alternativa para Planner5D */
+.planner5d-preview {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.preview-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+  margin-bottom: 30px;
+}
+
+.preview-card:hover {
+  transform: translateY(-5px);
+}
+
+.preview-image {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.preview-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.preview-image:hover .preview-overlay {
+  opacity: 1;
+}
+
+.preview-image:hover img {
+  transform: scale(1.05);
+}
+
+.play-button {
+  width: 80px;
+  height: 80px;
+  background: rgba(52, 152, 219, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+}
+
+.preview-overlay p {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.preview-content {
+  padding: 30px;
+  text-align: center;
+}
+
+.preview-content h3 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.preview-content > p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.preview-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.feature {
+  background: #ecf0f1;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.btn-3d {
+  display: inline-block;
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-3d:hover {
+  background: linear-gradient(45deg, #2980b9, #1f618d);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+}
+
+/* Información adicional */
+.planner5d-info {
+  margin-top: 30px;
+}
+
+.info-box {
+  background: #f8f9fa;
+  border-left: 4px solid #3498db;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.info-box h4 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.info-box p {
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.iframe-note {
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+.iframe-note a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.iframe-note a:hover {
+  text-decoration: underline;
+}
+
+/* Biblioteca Virtual */
+.library-section {
+  background: #f8f9fa;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.book-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.book-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.book-cover {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  background: linear-gradient(45deg, #3498db, #2c3e50);
+}
+
+.book-info {
+  padding: 20px;
+}
+
+.book-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
+.book-author {
+  color: #7f8c8d;
+  margin-bottom: 10px;
+}
+
+.book-description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #555;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  grid-column: 1 / -1;
+}
+
+/* Footer */
+footer {
+  background: #2c3e50;
+  color: #ecf0f1;
+  text-align: center;
+  padding: 30px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-info {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .nav-menu {
+    display: none;
+  }
+  
+  .books-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Responsive para Planner5D */
+  .preview-features {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .feature {
+    width: fit-content;
+  }
+  
+  .preview-content {
+    padding: 20px;
+  }
+  
+  .preview-image {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-content {
+    padding: 20px 10px;
+  }
+  
+  .hero-info {
+    padding: 20px;
+  }
+  
+  .preview-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .btn-3d {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+/* Apply to the element containing the content you want to scroll */
+.element-with-scrolling-content {
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
