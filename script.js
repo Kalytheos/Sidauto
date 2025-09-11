@@ -181,6 +181,9 @@ function loadBooksFromJSON() {
       // Mostrar mensaje de bienvenida por defecto
       displayBooks([]); // Mostrar mensaje de bienvenida
       
+      // Mostrar mensaje de bienvenida en contador
+      updateSearchResults(0, 'welcome');
+      
       // Actualizar estadísticas
       updateBookStatistics();
       
@@ -386,14 +389,29 @@ function displayBooks(books) {
 }
 
 // Actualizar contador de resultados
-function updateSearchResults(count, isInitial = false) {
+function updateSearchResults(count, state = 'search') {
   const resultsSpan = document.getElementById('searchResults');
-  if (resultsSpan) {
-    if (isInitial) {
-      resultsSpan.innerHTML = `Usa la búsqueda para explorar nuestros <strong>${allBooks.length}</strong> libros`;
-    } else {
+  if (!resultsSpan) return;
+  
+  switch (state) {
+    case 'welcome':
+      // Estado inicial - mensaje de bienvenida
+      resultsSpan.innerHTML = `Utiliza la búsqueda para explorar nuestra colección`;
+      break;
+    case 'search':
+      // Resultados de búsqueda
       resultsSpan.innerHTML = `Mostrando <strong>${count}</strong> ${count === 1 ? 'libro' : 'libros'}`;
-    }
+      break;
+    case 'no-results':
+      // Sin resultados
+      resultsSpan.innerHTML = `No se encontraron libros con esos criterios`;
+      break;
+    case 'total':
+      // Mostrar todos los libros (cuando se hace "limpiar filtros")
+      resultsSpan.innerHTML = `Mostrando <strong>${count}</strong> ${count === 1 ? 'libro' : 'libros'} de nuestra colección`;
+      break;
+    default:
+      resultsSpan.innerHTML = `Mostrando <strong>${count}</strong> ${count === 1 ? 'libro' : 'libros'}`;
   }
 }
 
@@ -502,7 +520,23 @@ function applyFilters() {
   });
   
   displayBooks(filteredBooks);
-  updateSearchResults(filteredBooks.length);
+  
+  // Determinar el estado del contador basado en los filtros
+  const hasActiveFilters = query || selectedGenre || selectedEditorial || selectedYear || selectedStatus;
+  
+  if (!hasActiveFilters) {
+    // No hay filtros activos - estado de bienvenida
+    updateSearchResults(0, 'welcome');
+  } else if (filteredBooks.length === 0) {
+    // Hay filtros pero no resultados
+    updateSearchResults(0, 'no-results');
+  } else if (filteredBooks.length === allBooks.length) {
+    // Mostrando todos los libros (por ejemplo, búsqueda muy general)
+    updateSearchResults(filteredBooks.length, 'total');
+  } else {
+    // Mostrando resultados filtrados
+    updateSearchResults(filteredBooks.length, 'search');
+  }
 }
 
 // Actualizar estadísticas de libros
@@ -537,14 +571,6 @@ function updateBookStatistics() {
   
   if (availableBooksElement) {
     availableBooksElement.textContent = stats.disponibles;
-  }
-}
-
-// Actualizar contador de resultados
-function updateSearchResults(count, isWelcome = false) {
-  const resultsSpan = document.getElementById('searchResults');
-  if (resultsSpan) {
-    resultsSpan.innerHTML = `Mostrando <strong>${count}</strong> ${count === 1 ? 'libro' : 'libros'}`;
   }
 }
 
