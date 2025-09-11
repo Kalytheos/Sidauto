@@ -18,6 +18,12 @@
       <nav class="navbar">
         <div class="nav-container">
           <h1 class="nav-logo">SIDAUTO BIBLIOTECA</h1>
+          
+          <!-- Barra de búsqueda rápida -->
+          <div class="quick-search">
+            <input type="text" id="quickSearchInput" placeholder="🔍 Buscar libros...">
+          </div>
+          
           <ul class="nav-menu">
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#proyecto">Proyecto 3D</a></li>
@@ -94,6 +100,56 @@
         <div class="container">
           <h2>Biblioteca Virtual</h2>
           <p>Explora nuestra colección digital de libros</p>
+          
+          <!-- Sistema de Búsqueda -->
+          <div class="search-system">
+            <div class="search-bar">
+              <input type="text" id="searchInput" placeholder="🔍 Buscar libros por título, autor, editorial..." />
+              <button id="clearSearch" class="clear-btn">✕</button>
+            </div>
+            
+            <!-- Filtros -->
+            <div class="filters">
+              <div class="filter-group">
+                <label for="genreFilter">Género:</label>
+                <select id="genreFilter">
+                  <option value="">Todos los géneros</option>
+                </select>
+              </div>
+              
+              <div class="filter-group">
+                <label for="editorialFilter">Editorial:</label>
+                <select id="editorialFilter">
+                  <option value="">Todas las editoriales</option>
+                </select>
+              </div>
+              
+              <div class="filter-group">
+                <label for="yearFilter">Año:</label>
+                <select id="yearFilter">
+                  <option value="">Todos los años</option>
+                </select>
+              </div>
+              
+              <div class="filter-group">
+                <label for="statusFilter">Estado:</label>
+                <select id="statusFilter">
+                  <option value="">Todos</option>
+                  <option value="disponible">Disponible</option>
+                  <option value="prestado">Prestado</option>
+                  <option value="reservado">Reservado</option>
+                </select>
+              </div>
+            </div>
+            
+            <!-- Estadísticas de búsqueda -->
+            <div class="search-stats">
+              <span id="searchResults">Mostrando <strong>8</strong> libros</span>
+              <button id="resetFilters" class="reset-btn">🔄 Limpiar filtros</button>
+            </div>
+          </div>
+          
+          <!-- Contenedor de libros -->
           <div class="books-grid" id="booksGrid">
             <div class="loading">Cargando libros...</div>
           </div>
