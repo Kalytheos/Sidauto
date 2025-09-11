@@ -40,18 +40,37 @@ body {
 }
 
 .nav-logo {
-  color: #ecf0f1;
+  background: 
+    linear-gradient(rgba(255,255,255,1), rgba(0,0,0, 0.9)), 
+    url('assets/fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+  /* Hacer el texto transparente para mostrar el fondo */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
   font-size: 1.5rem;
   font-weight: bold;
   letter-spacing: 1px;
   flex-shrink: 0;
+  
+  /* Fallback para navegadores que no soporten background-clip */
+  color: #ecf0f1;
+  
+  /* Sombra para mejor definición */
+  filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.8));
 }
 
 /* Búsqueda rápida en navbar */
 .quick-search {
   flex: 1;
-  max-width: 400px;
+  max-width: 1000px; /* Más espacio disponible sin el menú */
   position: relative;
+  margin-left: 40px; /* Espaciado del logo */
 }
 
 #quickSearchInput {
@@ -196,6 +215,7 @@ body {
   border: 1px solid #dee2e6;
 }
 
+/* Nav menu styles - Comentado ya que se eliminó la navegación
 .nav-menu {
   display: flex;
   list-style: none;
@@ -212,6 +232,7 @@ body {
 .nav-menu a:hover {
   color: #3498db;
 }
+*/
 
 /* Sección Hero */
 .hero {
@@ -830,38 +851,28 @@ footer p {
     text-align: center;
   }
   
-  /* Navbar responsive */
+  /* Navbar responsive - Simplificado sin menú de navegación */
   .nav-container {
     flex-wrap: wrap;
     height: auto;
     padding: 15px 20px;
-  }
-  
-  .nav-logo {
-    order: 1;
-    font-size: 1.3rem;
-  }
-  
-  .quick-search {
-    order: 3;
-    flex: 1 1 100%;
-    margin-top: 15px;
-    max-width: none;
-  }
-  
-  .nav-menu {
-    order: 2;
-    display: flex;
     gap: 15px;
   }
   
-  .nav-menu a {
-    font-size: 0.9rem;
+  .nav-logo {
+    font-size: 1.3rem;
+    flex-shrink: 0;
   }
   
-  /* Ajustar espaciado hero para navbar más alto */
+  .quick-search {
+    flex: 1;
+    max-width: none;
+    margin-left: 0; /* Sin margin en móvil */
+  }
+  
+  /* Ajustar espaciado hero para navbar más compacto */
   .hero {
-    padding-top: 120px;
+    padding-top: 100px; /* Menos espacio ya que no hay menú */
     background-attachment: scroll; /* Mejor rendimiento en móviles */
   }
   
@@ -933,21 +944,13 @@ footer p {
     font-size: 1.1rem;
   }
   
-  .nav-menu {
-    gap: 10px;
-  }
-  
-  .nav-menu a {
-    font-size: 0.8rem;
-  }
-  
   #quickSearchInput {
     font-size: 0.9rem;
     padding: 8px 12px;
   }
   
   .hero {
-    padding-top: 140px;
+    padding-top: 120px; /* Ajustado para navbar sin menú */
   }
   
   .preview-content h3 {
