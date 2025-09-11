@@ -559,7 +559,7 @@ function updateBookStatistics() {
     }
   });
   
-  console.log('📊 Estadísticas actualizadas:', stats);
+  console.log('Estadísticas actualizadas:', stats);
   
   // Actualizar UI si existen los elementos
   const totalBooksElement = document.getElementById('totalBooks');
