@@ -626,8 +626,8 @@ section {
 
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 250px));
+  gap: 25px;
   margin-top: 40px;
   justify-content: center; /* Centrar las tarjetas */
 }
@@ -785,10 +785,37 @@ section {
 
 /* Footer */
 footer {
-  background: #2c3e50;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(44, 62, 80, 0.7)), 
+    url('assets/fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #ecf0f1;
   text-align: center;
   padding: 30px 0;
+  position: relative;
+}
+
+/* Capa adicional de oscurecimiento para el footer */
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+/* Asegurar que el texto del footer esté por encima */
+footer p {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
 }
 
 /* Responsive */
@@ -838,9 +865,14 @@ footer {
     background-attachment: scroll; /* Mejor rendimiento en móviles */
   }
   
+  /* Footer responsive */
+  footer {
+    background-attachment: scroll; /* Mejor rendimiento en móviles */
+  }
+  
   .books-grid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 240px));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 220px));
+    gap: 18px;
     justify-content: center; /* Centrar en móviles también */
   }
   
