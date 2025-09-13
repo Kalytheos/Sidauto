@@ -981,9 +981,9 @@ ${libro.cantidad ? `📊 Cantidad: ${libro.cantidad}` : ''}
 
 📝 Descripción: ${libro.descripcion || 'Sin descripción disponible'}
 
-🎯 Estado: ${libro.estado === 'disponible' ? '✅ Disponible' : 
-             libro.estado === 'prestado' ? '📤 Prestado' : 
-             libro.estado === 'reservado' ? '📋 Reservado' : '❓ No definido'}
+🎯 Estado: ${libro.estado === 'disponible' ? 'Disponible' : 
+             libro.estado === 'prestado' ? 'Prestado' : 
+             libro.estado === 'reservado' ? 'Reservado' : 'No definido'}
 
 ${libro.fechaAdquisicion ? `📆 Fecha de adquisición: ${libro.fechaAdquisicion}` : ''}
 
