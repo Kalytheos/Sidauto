@@ -169,17 +169,51 @@ const booksData = {
   }
 };
 
-// Cargar libros desde datos embebidos (solución para CORS)
-function loadBooksFromJSON() {
+// Cargar libros desde el archivo JSON
+async function loadBooksFromJSON() {
   try {
-    console.log('✅ Cargando libros desde datos embebidos...');
+    console.log('✅ Cargando libros desde JSON actualizado...');
     
+    // Primero intentar cargar desde archivo JSON
+    const response = await fetch('./data/libros.json');
+    
+    if (response.ok) {
+      const data = await response.json();
+      console.log('📚 Datos cargados desde archivo JSON:', data);
+      
+      if (data && data.libros && Array.isArray(data.libros)) {
+        allBooks = data.libros;
+        console.log(`✅ Se cargaron ${allBooks.length} libros desde JSON`);
+        
+        // Mostrar mensaje de bienvenida por defecto
+        displayBooks([]);
+        
+        // Mostrar mensaje de bienvenida en contador
+        updateSearchResults(0, 'welcome');
+        
+        // Actualizar estadísticas
+        updateBookStatistics();
+        
+        // Poblar filtros
+        populateFilters(data);
+        
+        console.log('📚 Libros disponibles:', allBooks.map(book => book.titulo));
+        return;
+      }
+    }
+    
+    throw new Error('No se pudo cargar desde JSON, usando datos embebidos');
+    
+  } catch (error) {
+    console.log('⚠️ Usando datos embebidos como fallback:', error.message);
+    
+    // Usar datos embebidos como fallback
     if (booksData && booksData.libros && Array.isArray(booksData.libros)) {
       allBooks = booksData.libros;
-      console.log(`✅ Se cargaron ${allBooks.length} libros exitosamente`);
+      console.log(`✅ Se cargaron ${allBooks.length} libros desde datos embebidos`);
       
       // Mostrar mensaje de bienvenida por defecto
-      displayBooks([]); // Mostrar mensaje de bienvenida
+      displayBooks([]);
       
       // Mostrar mensaje de bienvenida en contador
       updateSearchResults(0, 'welcome');
@@ -192,12 +226,9 @@ function loadBooksFromJSON() {
       
       console.log('📚 Libros disponibles:', allBooks.map(book => book.titulo));
     } else {
-      console.error('❌ Estructura de datos incorrecta');
-      throw new Error('Estructura de datos incorrecta');
+      console.error('❌ Error: No hay datos disponibles');
+      loadFallbackBooks();
     }
-  } catch (error) {
-    console.error('❌ Error al cargar libros:', error);
-    loadFallbackBooks();
   }
 }
 
@@ -289,28 +320,23 @@ function createBookCard(libro) {
     'reservado': 'Reservado'
   }[estadoClass] || 'Disponible';
   
-  const fallbackImage = `data:image/svg+xml;base64,${btoa(`
-    <svg width="300" height="400" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="bookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:1" />
-        </linearGradient>
-      </defs>
-      <rect width="300" height="400" fill="url(#bookGrad)" rx="8"/>
-      <rect x="20" y="30" width="260" height="4" fill="rgba(255,255,255,0.3)" rx="2"/>
-      <rect x="20" y="50" width="200" fill="rgba(255,255,255,0.8)" rx="2" height="20"/>
-      <rect x="20" y="80" width="160" fill="rgba(255,255,255,0.6)" rx="2" height="16"/>
-      <rect x="20" y="350" width="260" height="4" fill="rgba(255,255,255,0.3)" rx="2"/>
-      <circle cx="150" cy="200" r="40" fill="rgba(255,255,255,0.2)"/>
-      <path d="M130 185 L130 215 L170 200 Z" fill="rgba(255,255,255,0.8)"/>
-    </svg>
-  `)}`;
+  // Crear icono basado en el género
+  const genreIcon = {
+    'Realismo Mágico': '✨',
+    'Novela de Caballería': '⚔️',
+    'Romance': '💕',
+    'Novela Psicológica': '🧠',
+    'Literatura Experimental': '🎭',
+    'Novela Corta': '📖'
+  }[libro.genero] || '📚';
 
   return `
     <div class="book-card" onclick="openBookDetails('${libro.titulo}', '${libro.autor}')">
-      <img src="${libro.portada}" alt="${libro.titulo}" class="book-cover" 
-           onerror="this.src='${fallbackImage}'" />
+      <div class="book-header">
+        <div class="book-icon">${genreIcon}</div>
+        <div class="book-id">${libro.id}</div>
+      </div>
+      
       <div class="book-info">
         <div class="book-content">
           <h3 class="book-title">${libro.titulo}</h3>
@@ -331,6 +357,10 @@ function createBookCard(libro) {
             <div class="detail-row">
               <span class="detail-label">Género:</span>
               <span>${libro.genero}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Ubicación:</span>
+              <span>${libro.ubicacion}</span>
             </div>
           </div>
           
