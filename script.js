@@ -3,273 +3,106 @@ let allBooks = [];
 let filteredBooks = [];
 let suggestionsVisible = false;
 
-// Datos de los libros embebidos (solución para CORS)
-const booksData = {
-  "metadata": {
-    "version": "1.0",
-    "ultimaActualizacion": "2025-09-11",
-    "totalLibros": 8,
-    "biblioteca": "SIDAUTO BIBLIOTECA"
-  },
-  "libros": [
-    {
-      "id": "LIB001",
-      "titulo": "Cien años de soledad",
-      "autor": "Gabriel García Márquez",
-      "isbn": "9780060883287",
-      "editorial": "Harper & Row",
-      "año": 1967,
-      "genero": "Realismo Mágico",
-      "categoria": "Literatura Latinoamericana",
-      "ubicacion": "A-1-01",
-      "estado": "disponible",
-      "descripcion": "Una obra maestra del realismo mágico que narra la historia de la familia Buendía a través de varias generaciones.",
-      "portada": "https://covers.openlibrary.org/b/isbn/9780060883287-M.jpg",
-      "tags": ["realismo mágico", "familia", "generaciones", "macondo", "clásico"]
-    },
-    {
-      "id": "LIB002",
-      "titulo": "Don Quijote de la Mancha",
-      "autor": "Miguel de Cervantes",
-      "isbn": "9780142437230",
-      "editorial": "Penguin Classics",
-      "año": 1605,
-      "genero": "Novela de Caballería",
-      "categoria": "Literatura Española",
-      "ubicacion": "A-1-02",
-      "estado": "disponible",
-      "descripcion": "Las aventuras del ingenioso hidalgo Don Quijote y su fiel escudero Sancho Panza.",
-      "portada": "https://covers.openlibrary.org/b/isbn/9780142437230-M.jpg",
-      "tags": ["caballería", "aventura", "hidalgo", "sancho panza", "clásico"]
-    },
-    {
-      "id": "LIB003",
-      "titulo": "El Amor en los Tiempos del Cólera",
-      "autor": "Gabriel García Márquez",
-      "isbn": "9780307389732",
-      "editorial": "Vintage Books",
-      "año": 1985,
-      "genero": "Romance",
-      "categoria": "Literatura Latinoamericana",
-      "ubicacion": "A-1-03",
-      "estado": "disponible",
-      "descripcion": "Una historia de amor que trasciende el tiempo y las circunstancias.",
-      "portada": "https://covers.openlibrary.org/b/isbn/9780307389732-M.jpg",
-      "tags": ["amor", "romance", "tiempo", "cólera", "garcía márquez"]
-    },
-    {
-      "id": "LIB004",
-      "titulo": "La Casa de los Espíritus",
-      "autor": "Isabel Allende",
-      "isbn": "9780553383805",
-      "editorial": "Plaza & Janés",
-      "año": 1982,
-      "genero": "Realismo Mágico",
-      "categoria": "Literatura Latinoamericana",
-      "ubicacion": "A-1-04",
-      "estado": "prestado",
-      "fechaDevolucion": "2025-09-20",
-      "prestadoA": "María González",
-      "descripcion": "Una saga familiar que mezcla realismo mágico con crítica social.",
-      "portada": "https://covers.openlibrary.org/b/isbn/9780553383805-M.jpg",
-      "tags": ["familia", "espíritus", "saga", "crítica social", "chile"]
-    },
-    {
-      "id": "LIB005",
-      "titulo": "El Túnel",
-      "autor": "Ernesto Sabato",
-      "isbn": "9788432217770",
-      "editorial": "Seix Barral",
-      "año": 1948,
-      "genero": "Novela Psicológica",
-      "categoria": "Literatura Argentina",
-      "ubicacion": "A-1-05",
-      "estado": "disponible",
-      "descripcion": "Una novela psicológica que explora la obsesión y la soledad humana.",
-      "portada": "https://covers.openlibrary.org/b/isbn/9788432217770-M.jpg",
-      "tags": ["psicológica", "obsesión", "soledad", "túnel", "argentina"]
-    },
-    {
-      "id": "LIB006",
-      "titulo": "Rayuela",
-      "autor": "Julio Cortázar",
-      "isbn": "9788437604572",
-      "editorial": "Cátedra",
-      "año": 1963,
-      "genero": "Literatura Experimental",
-      "categoria": "Literatura Argentina",
-      "ubicacion": "A-1-06",
-      "estado": "disponible",
-      "descripcion": "Una obra experimental que desafía las convenciones narrativas tradicionales.",
-      "portada": "https://covers.openlibrary.org/b/isbn/9788437604572-M.jpg",
-      "tags": ["experimental", "rayuela", "cortázar", "narrativa", "vanguardia"]
-    },
-    {
-      "id": "LIB007",
-      "titulo": "Pedro Páramo",
-      "autor": "Juan Rulfo",
-      "isbn": "9780802133908",
-      "editorial": "Fondo de Cultura Económica",
-      "año": 1955,
-      "genero": "Realismo Mágico",
-      "categoria": "Literatura Mexicana",
-      "ubicacion": "A-1-07",
-      "estado": "disponible",
-      "descripcion": "Una obra fundamental de la literatura mexicana que narra la búsqueda de un hijo por su padre en un pueblo fantasmal.",
-      "portada": "https://covers.openlibrary.org/b/isbn/9780802133908-M.jpg",
-      "tags": ["méxico", "fantasmal", "padre", "hijo", "comala"]
-    },
-    {
-      "id": "LIB008",
-      "titulo": "Crónica de una Muerte Anunciada",
-      "autor": "Gabriel García Márquez",
-      "isbn": "9780307475893",
-      "editorial": "Vintage Español",
-      "año": 1981,
-      "genero": "Novela Corta",
-      "categoria": "Literatura Latinoamericana",
-      "ubicacion": "A-1-08",
-      "estado": "reservado",
-      "reservadoPor": "Carlos Méndez",
-      "fechaReserva": "2025-09-10",
-      "descripcion": "Una investigación literaria sobre un crimen anunciado que nadie pudo evitar.",
-      "portada": "https://covers.openlibrary.org/b/isbn/9780307475893-M.jpg",
-      "tags": ["crónica", "muerte", "crimen", "anunciada", "honor"]
-    }
-  ],
-  "categorias": [
-    "Literatura Latinoamericana",
-    "Literatura Española", 
-    "Literatura Argentina",
-    "Literatura Mexicana"
-  ],
-  "generos": [
-    "Realismo Mágico",
-    "Novela de Caballería",
-    "Romance",
-    "Novela Psicológica",
-    "Literatura Experimental",
-    "Novela Corta"
-  ],
-  "editoriales": [
-    "Harper & Row",
-    "Penguin Classics",
-    "Vintage Books",
-    "Plaza & Janés",
-    "Seix Barral",
-    "Cátedra",
-    "Fondo de Cultura Económica",
-    "Vintage Español"
-  ],
-  "estadisticas": {
-    "disponibles": 5,
-    "prestados": 1,
-    "reservados": 2,
-    "total": 8
-  }
-};
+// Variables de paginación
+let currentPage = 1;
+let itemsPerPage = 20;
+let totalPages = 1;
 
-// Cargar libros desde el archivo JSON
+// Cargar libros desde el archivo JSON actualizado
 async function loadBooksFromJSON() {
   try {
     console.log('✅ Cargando libros desde JSON actualizado...');
     
-    // Primero intentar cargar desde archivo JSON
     const response = await fetch('./data/libros.json');
     
-    if (response.ok) {
-      const data = await response.json();
-      console.log('📚 Datos cargados desde archivo JSON:', data);
-      
-      if (data && data.libros && Array.isArray(data.libros)) {
-        allBooks = data.libros;
-        console.log(`✅ Se cargaron ${allBooks.length} libros desde JSON`);
-        
-        // Mostrar mensaje de bienvenida por defecto
-        displayBooks([]);
-        
-        // Mostrar mensaje de bienvenida en contador
-        updateSearchResults(0, 'welcome');
-        
-        // Actualizar estadísticas
-        updateBookStatistics();
-        
-        // Poblar filtros
-        populateFilters(data);
-        
-        console.log('📚 Libros disponibles:', allBooks.map(book => book.titulo));
-        return;
-      }
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
     }
     
-    throw new Error('No se pudo cargar desde JSON, usando datos embebidos');
+    const rawData = await response.json();
+    console.log('📚 Datos cargados desde JSON:', `${rawData.length} registros`);
+    
+    // Transformar los datos del nuevo formato al formato esperado
+    allBooks = rawData.map((item, index) => ({
+      id: `LIB${String(item.No).padStart(3, '0')}`,
+      titulo: item['TITULO\n245$A'] || 'Sin título',
+      autor: item['AUTOR\n1XX'] || 'Autor desconocido',
+      isbn: item['ISBN\n020$A'] || '',
+      editorial: item['EDITORIAL \n264$B'] || 'Editorial desconocida',
+      año: parseInt(item['AÑO DE PUBLICACIÓN']) || 0,
+      genero: item['MATERIA'] || 'Sin clasificar',
+      categoria: item['MATERIA'] || 'General',
+      ubicacion: item['UBICACIÓN '] || 'No especificada',
+      codigo: item['CÓDIGO'] || '',
+      estado: 'disponible', // Por defecto disponible
+      descripcion: `Libro de ${item['MATERIA'] || 'literatura'} publicado en ${item['AÑO DE PUBLICACIÓN'] || 'fecha desconocida'}.`,
+      fechaAdquisicion: item['FECHA DE ADQUISICIÓN '] || '',
+      edicion: item['No. EDICION\n'] || '1era',
+      cantidad: item['CANTIDAD '] || '1',
+      tags: [
+        item['MATERIA']?.toLowerCase(),
+        item['AUTOR\n1XX']?.split(' ')[0]?.toLowerCase(),
+        item['AÑO DE PUBLICACIÓN']
+      ].filter(Boolean)
+    }));
+    
+    console.log(`✅ Se transformaron ${allBooks.length} libros exitosamente`);
+    
+    // Mostrar mensaje de bienvenida por defecto
+    displayBooks([]);
+    
+    // Mostrar mensaje de bienvenida en contador
+    updateSearchResults(0, 'welcome');
+    
+    // Actualizar estadísticas
+    updateBookStatistics();
+    
+    // Poblar filtros con las nuevas categorías
+    populateFiltersFromBooks();
+    
+    console.log('📚 Libros disponibles:', allBooks.slice(0, 5).map(book => book.titulo));
+    console.log(`📊 Total de libros: ${allBooks.length}`);
     
   } catch (error) {
-    console.log('⚠️ Usando datos embebidos como fallback:', error.message);
-    
-    // Usar datos embebidos como fallback
-    if (booksData && booksData.libros && Array.isArray(booksData.libros)) {
-      allBooks = booksData.libros;
-      console.log(`✅ Se cargaron ${allBooks.length} libros desde datos embebidos`);
-      
-      // Mostrar mensaje de bienvenida por defecto
-      displayBooks([]);
-      
-      // Mostrar mensaje de bienvenida en contador
-      updateSearchResults(0, 'welcome');
-      
-      // Actualizar estadísticas
-      updateBookStatistics();
-      
-      // Poblar filtros
-      populateFilters(booksData);
-      
-      console.log('📚 Libros disponibles:', allBooks.map(book => book.titulo));
-    } else {
-      console.error('❌ Error: No hay datos disponibles');
-      loadFallbackBooks();
-    }
+    console.error('❌ Error al cargar libros:', error);
+    loadFallbackBooks();
   }
 }
 
 // Datos de fallback (simplificados para debug)
+// Datos de fallback (mensaje de error si JSON no carga)
 function loadFallbackBooks() {
   console.log('🔄 Usando datos de fallback');
-  const fallbackData = [
+  
+  allBooks = [
     {
-      id: "LIB001",
-      titulo: "Cien años de soledad",
-      autor: "Gabriel García Márquez",
-      editorial: "Harper & Row",
-      año: 1967,
-      genero: "Realismo Mágico",
-      estado: "disponible",
-      descripcion: "Una obra maestra del realismo mágico que narra la historia de la familia Buendía a través de varias generaciones.",
-      portada: "https://covers.openlibrary.org/b/isbn/9780060883287-M.jpg",
-      tags: ["realismo mágico", "familia", "generaciones", "macondo", "clásico"]
-    },
-    {
-      id: "LIB002",
-      titulo: "Don Quijote de la Mancha",
-      autor: "Miguel de Cervantes",
-      editorial: "Penguin Classics",
-      año: 1605,
-      genero: "Novela de Caballería",
-      estado: "disponible",
-      descripcion: "Las aventuras del ingenioso hidalgo Don Quijote y su fiel escudero Sancho Panza.",
-      portada: "https://covers.openlibrary.org/b/isbn/9780142437230-M.jpg",
-      tags: ["caballería", "aventura", "hidalgo", "sancho panza", "clásico"]
+      id: 'FALL001',
+      titulo: 'Error de Carga - JSON no disponible',
+      autor: 'Sistema SIDAUTO',
+      isbn: '',
+      editorial: 'Sistema',
+      año: 2025,
+      genero: 'Sistema',
+      categoria: 'Error',
+      ubicacion: 'N/A',
+      codigo: 'ERROR001',
+      estado: 'error',
+      descripcion: 'No se pudo cargar la base de datos de libros. Verifica que el archivo data/libros.json esté disponible.',
+      fechaAdquisicion: '',
+      edicion: '1era',
+      cantidad: '0',
+      tags: ['error', 'sistema', 'json']
     }
   ];
   
-  allBooks = fallbackData;
   filteredBooks = [];
   displayBooks([]);
   updateBookStatistics();
+  updateSearchResults(0, 'error');
 }
 
-// Poblar selectores de filtros
-function populateFilters(data) {
+// Poblar selectores de filtros desde los libros cargados
+function populateFiltersFromBooks() {
   const genreSelect = document.getElementById('genreFilter');
   const editorialSelect = document.getElementById('editorialFilter');
   const yearSelect = document.getElementById('yearFilter');
@@ -279,89 +112,132 @@ function populateFilters(data) {
     return;
   }
   
+  // Limpiar opciones existentes (excepto la primera "Todos")
+  [genreSelect, editorialSelect, yearSelect].forEach(select => {
+    while (select.children.length > 1) {
+      select.removeChild(select.lastChild);
+    }
+  });
+  
+  if (!allBooks || allBooks.length === 0) return;
+  
+  // Obtener valores únicos de los libros
+  const generos = [...new Set(allBooks.map(libro => libro.genero).filter(Boolean))].sort();
+  const editoriales = [...new Set(allBooks.map(libro => libro.editorial).filter(Boolean))].sort();
+  const años = [...new Set(allBooks.map(libro => libro.año).filter(año => año && año > 0))].sort((a, b) => b - a);
+  
   // Poblar géneros
-  if (data.generos) {
-    data.generos.forEach(genero => {
-      const option = document.createElement('option');
-      option.value = genero;
-      option.textContent = genero;
-      genreSelect.appendChild(option);
-    });
-  }
+  generos.forEach(genero => {
+    const option = document.createElement('option');
+    option.value = genero;
+    option.textContent = genero;
+    genreSelect.appendChild(option);
+  });
   
   // Poblar editoriales
-  if (data.editoriales) {
-    data.editoriales.forEach(editorial => {
-      const option = document.createElement('option');
-      option.value = editorial;
-      option.textContent = editorial;
-      editorialSelect.appendChild(option);
-    });
-  }
+  editoriales.forEach(editorial => {
+    const option = document.createElement('option');
+    option.value = editorial;
+    option.textContent = editorial;
+    editorialSelect.appendChild(option);
+  });
   
-  // Poblar años (únicos, ordenados)
-  if (data.libros) {
-    const years = [...new Set(data.libros.map(libro => libro.año))].sort((a, b) => b - a);
-    years.forEach(año => {
-      const option = document.createElement('option');
-      option.value = año;
-      option.textContent = año;
-      yearSelect.appendChild(option);
-    });
-  }
+  // Poblar años
+  años.forEach(año => {
+    const option = document.createElement('option');
+    option.value = año;
+    option.textContent = año;
+    yearSelect.appendChild(option);
+  });
+  
+  console.log(`✅ Filtros poblados: ${generos.length} géneros, ${editoriales.length} editoriales, ${años.length} años`);
 }
 
-// Crear tarjeta de libro mejorada
+// Crear tarjeta de libro actualizada para la nueva estructura
 function createBookCard(libro) {
   const estadoClass = libro.estado || 'disponible';
   const estadoTexto = {
-    'disponible': 'Disponible',
-    'prestado': 'Prestado',
-    'reservado': 'Reservado'
-  }[estadoClass] || 'Disponible';
+    'disponible': '✅ Disponible',
+    'prestado': '📤 Prestado',
+    'reservado': '📋 Reservado',
+    'sistema': '⚙️ Sistema',
+    'error': '❌ Error'
+  }[estadoClass] || '✅ Disponible';
   
-  // Crear icono basado en el género
+  // Crear icono basado en el género/materia
   const genreIcon = {
-    'Realismo Mágico': '✨',
-    'Novela de Caballería': '⚔️',
-    'Romance': '💕',
-    'Novela Psicológica': '🧠',
-    'Literatura Experimental': '🎭',
-    'Novela Corta': '📖'
-  }[libro.genero] || '📚';
+    'LITERATURA': '📚',
+    'FICCIÓN': '📖',
+    'HISTORIA': '🏛️',
+    'CIENCIAS': '🔬',
+    'ARTE': '🎨',
+    'FILOSOFÍA': '💭',
+    'DERECHO': '⚖️',
+    'MEDICINA': '🏥',
+    'MATEMÁTICAS': '➕',
+    'INGENIERÍA': '⚙️',
+    'ECONOMÍA': '💼',
+    'PSICOLOGÍA': '🧠',
+    'EDUCACIÓN': '🎓',
+    'RELIGIÓN': '✝️',
+    'DEPORTES': '⚽',
+    'COCINA': '🍳',
+    'VIAJES': '✈️',
+    'BIOGRAFÍA': '👤',
+    'AUTOAYUDA': '💪',
+    'NOVELA': '📘',
+    'CUENTO': '�',
+    'POESÍA': '🎭',
+    'ENSAYO': '📝',
+    'TEATRO': '🎪'
+  }[libro.genero?.toUpperCase()] || '📚';
+
+  // Limpiar y formatear datos
+  const titulo = (libro.titulo || 'Sin título').replace(/\n/g, ' ').trim();
+  const autor = (libro.autor || 'Autor desconocido').replace(/\n/g, ' ').trim();
+  const editorial = (libro.editorial || 'Editorial desconocida').replace(/\n/g, ' ').trim();
+  const año = libro.año && libro.año > 0 ? libro.año : 'N/D';
+  const genero = (libro.genero || 'Sin clasificar').replace(/\n/g, ' ').trim();
+  const ubicacion = (libro.ubicacion || 'No especificada').replace(/\n/g, ' ').trim();
+  const codigo = (libro.codigo || libro.id || 'N/A').replace(/\n/g, ' ').trim();
 
   return `
-    <div class="book-card" onclick="openBookDetails('${libro.titulo}', '${libro.autor}')">
+    <div class="book-card" onclick="openBookDetails('${libro.id}')">
       <div class="book-header">
         <div class="book-icon">${genreIcon}</div>
-        <div class="book-id">${libro.id}</div>
+        <div class="book-id">${codigo}</div>
       </div>
       
       <div class="book-info">
         <div class="book-content">
-          <h3 class="book-title">${libro.titulo}</h3>
-          <p class="book-author">por ${libro.autor}</p>
-          <p class="book-description">${libro.descripcion}</p>
+          <h3 class="book-title">${titulo}</h3>
+          <p class="book-author">por ${autor}</p>
+          <p class="book-description">${libro.descripcion || `Libro de ${genero.toLowerCase()} disponible en ${ubicacion}`}</p>
         </div>
         
         <div class="book-footer">
           <div class="book-details">
             <div class="detail-row">
-              <span class="detail-label">Editorial:</span>
-              <span>${libro.editorial}</span>
+              <span class="detail-label">📏 Editorial:</span>
+              <span>${editorial}</span>
             </div>
             <div class="detail-row">
-              <span class="detail-label">Año:</span>
-              <span>${libro.año}</span>
+              <span class="detail-label">📅 Año:</span>
+              <span>${año}</span>
             </div>
             <div class="detail-row">
-              <span class="detail-label">Género:</span>
-              <span>${libro.genero}</span>
+              <span class="detail-label">📂 Materia:</span>
+              <span>${genero}</span>
             </div>
             <div class="detail-row">
-              <span class="detail-label">Ubicación:</span>
-              <span>${libro.ubicacion}</span>
+              <span class="detail-label">📍 Ubicación:</span>
+              <span>${ubicacion}</span>
             </div>
+            ${libro.isbn ? `
+            <div class="detail-row">
+              <span class="detail-label">🔍 ISBN:</span>
+              <span>${libro.isbn}</span>
+            </div>` : ''}
           </div>
           
           <div class="book-status ${estadoClass}">${estadoTexto}</div>
@@ -371,13 +247,22 @@ function createBookCard(libro) {
   `;
 }
 
-// Mostrar libros
+// Mostrar libros con paginación
 function displayBooks(books) {
   const booksGrid = document.getElementById('booksGrid');
+  const paginationContainer = document.getElementById('paginationContainer');
   
   if (!booksGrid) return;
   
+  // Actualizar filteredBooks globalmente
+  filteredBooks = books;
+  
   if (books.length === 0) {
+    // Ocultar paginación cuando no hay resultados
+    if (paginationContainer) {
+      paginationContainer.style.display = 'none';
+    }
+    
     // Verificar si es estado inicial o no hay resultados
     const searchInput = document.getElementById('searchInput');
     const quickSearchInput = document.getElementById('quickSearchInput');
@@ -414,11 +299,170 @@ function displayBooks(books) {
     return;
   }
   
-  const booksHTML = books.map(book => createBookCard(book)).join('');
+  // Calcular paginación
+  totalPages = Math.ceil(books.length / itemsPerPage);
+  
+  // Ajustar página actual si está fuera de rango
+  if (currentPage > totalPages) {
+    currentPage = totalPages;
+  }
+  if (currentPage < 1) {
+    currentPage = 1;
+  }
+  
+  // Calcular índices para la página actual
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = Math.min(startIndex + itemsPerPage, books.length);
+  
+  // Obtener libros para la página actual
+  const booksForCurrentPage = books.slice(startIndex, endIndex);
+  
+  // Mostrar los libros
+  const booksHTML = booksForCurrentPage.map(book => createBookCard(book)).join('');
   booksGrid.innerHTML = booksHTML;
+  
+  // Mostrar y actualizar controles de paginación
+  updatePaginationControls();
+  
+  // Scroll suave hacia arriba cuando se cambia de página (solo si no es la primera carga)
+  if (books.length > itemsPerPage && currentPage > 1) {
+    const bibliotecaSection = document.getElementById('biblioteca');
+    if (bibliotecaSection) {
+      bibliotecaSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }
 }
 
-// Actualizar contador de resultados
+// Actualizar controles de paginación
+function updatePaginationControls() {
+  const paginationContainer = document.getElementById('paginationContainer');
+  const paginationInfo = document.getElementById('paginationInfo');
+  const pageNumbers = document.getElementById('pageNumbers');
+  const prevBtn = document.getElementById('prevPage');
+  const nextBtn = document.getElementById('nextPage');
+  const firstBtn = document.getElementById('firstPage');
+  const lastBtn = document.getElementById('lastPage');
+  
+  if (!paginationContainer || !filteredBooks || filteredBooks.length === 0) {
+    if (paginationContainer) paginationContainer.style.display = 'none';
+    return;
+  }
+  
+  // Mostrar contenedor de paginación
+  paginationContainer.style.display = 'flex';
+  
+  // Actualizar información de paginación
+  const startItem = ((currentPage - 1) * itemsPerPage) + 1;
+  const endItem = Math.min(currentPage * itemsPerPage, filteredBooks.length);
+  
+  if (paginationInfo) {
+    paginationInfo.textContent = `Mostrando ${startItem}-${endItem} de ${filteredBooks.length} libros`;
+  }
+  
+  // Actualizar botones de navegación
+  if (prevBtn && firstBtn) {
+    const isFirstPage = currentPage === 1;
+    prevBtn.disabled = isFirstPage;
+    firstBtn.disabled = isFirstPage;
+  }
+  
+  if (nextBtn && lastBtn) {
+    const isLastPage = currentPage === totalPages;
+    nextBtn.disabled = isLastPage;
+    lastBtn.disabled = isLastPage;
+  }
+  
+  // Generar números de página
+  if (pageNumbers) {
+    pageNumbers.innerHTML = generatePageNumbers();
+  }
+}
+
+// Generar números de página con lógica de "..." 
+function generatePageNumbers() {
+  let pagesHTML = '';
+  const maxVisiblePages = 7; // Número máximo de páginas visibles
+  
+  if (totalPages <= maxVisiblePages) {
+    // Mostrar todas las páginas si son pocas
+    for (let i = 1; i <= totalPages; i++) {
+      pagesHTML += `
+        <button class="page-number ${i === currentPage ? 'active' : ''}" 
+                onclick="goToPage(${i})">${i}</button>
+      `;
+    }
+  } else {
+    // Lógica compleja para muchas páginas
+    const startPage = Math.max(1, currentPage - 2);
+    const endPage = Math.min(totalPages, currentPage + 2);
+    
+    // Primera página
+    if (startPage > 1) {
+      pagesHTML += `<button class="page-number ${currentPage === 1 ? 'active' : ''}" onclick="goToPage(1)">1</button>`;
+      if (startPage > 2) {
+        pagesHTML += `<span class="page-ellipsis">...</span>`;
+      }
+    }
+    
+    // Páginas del rango actual
+    for (let i = startPage; i <= endPage; i++) {
+      pagesHTML += `
+        <button class="page-number ${i === currentPage ? 'active' : ''}" 
+                onclick="goToPage(${i})">${i}</button>
+      `;
+    }
+    
+    // Última página
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        pagesHTML += `<span class="page-ellipsis">...</span>`;
+      }
+      pagesHTML += `<button class="page-number ${currentPage === totalPages ? 'active' : ''}" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+    }
+  }
+  
+  return pagesHTML;
+}
+
+// Funciones de navegación de página
+function goToPage(page) {
+  if (page >= 1 && page <= totalPages && page !== currentPage) {
+    currentPage = page;
+    displayBooks(filteredBooks);
+  }
+}
+
+function goToFirstPage() {
+  goToPage(1);
+}
+
+function goToLastPage() {
+  goToPage(totalPages);
+}
+
+function goToPrevPage() {
+  if (currentPage > 1) {
+    goToPage(currentPage - 1);
+  }
+}
+
+function goToNextPage() {
+  if (currentPage < totalPages) {
+    goToPage(currentPage + 1);
+  }
+}
+
+// Cambiar número de elementos por página
+function changeItemsPerPage(newItemsPerPage) {
+  itemsPerPage = parseInt(newItemsPerPage);
+  currentPage = 1; // Resetear a primera página
+  displayBooks(filteredBooks);
+}
+
+// Actualizar contador de resultados con información de paginación
 function updateSearchResults(count, state = 'search') {
   const resultsSpan = document.getElementById('searchResults');
   if (!resultsSpan) return;
@@ -429,8 +473,12 @@ function updateSearchResults(count, state = 'search') {
       resultsSpan.innerHTML = `Utiliza la búsqueda para explorar nuestra colección`;
       break;
     case 'search':
-      // Resultados de búsqueda
-      resultsSpan.innerHTML = `Mostrando <strong>${count}</strong> ${count === 1 ? 'libro' : 'libros'}`;
+      // Resultados de búsqueda con información de paginación
+      if (count > itemsPerPage) {
+        resultsSpan.innerHTML = `Encontrados <strong>${count}</strong> ${count === 1 ? 'libro' : 'libros'} - Página ${currentPage} de ${totalPages}`;
+      } else {
+        resultsSpan.innerHTML = `Mostrando <strong>${count}</strong> ${count === 1 ? 'libro' : 'libros'}`;
+      }
       break;
     case 'no-results':
       // Sin resultados
@@ -438,7 +486,15 @@ function updateSearchResults(count, state = 'search') {
       break;
     case 'total':
       // Mostrar todos los libros (cuando se hace "limpiar filtros")
-      resultsSpan.innerHTML = `Mostrando <strong>${count}</strong> ${count === 1 ? 'libro' : 'libros'} de nuestra colección`;
+      if (count > itemsPerPage) {
+        resultsSpan.innerHTML = `<strong>${count}</strong> libros en total - Página ${currentPage} de ${totalPages}`;
+      } else {
+        resultsSpan.innerHTML = `Mostrando <strong>${count}</strong> ${count === 1 ? 'libro' : 'libros'} de nuestra colección`;
+      }
+      break;
+    case 'error':
+      // Error de carga
+      resultsSpan.innerHTML = `⚠️ Error al cargar la biblioteca`;
       break;
     default:
       resultsSpan.innerHTML = `Mostrando <strong>${count}</strong> ${count === 1 ? 'libro' : 'libros'}`;
@@ -512,42 +568,60 @@ function initSearchSystem() {
         quickSearchInput.value = '';
       }
       
+      // Resetear paginación
+      currentPage = 1;
+      
       applyFilters();
     });
   }
 }
 
-// Aplicar filtros de búsqueda
+// Aplicar filtros de búsqueda (actualizado para nueva estructura)
 function applyFilters() {
-  const query = document.getElementById('searchInput').value.toLowerCase();
+  const query = document.getElementById('searchInput').value.toLowerCase().trim();
   const selectedGenre = document.getElementById('genreFilter').value;
   const selectedEditorial = document.getElementById('editorialFilter').value;
   const selectedYear = document.getElementById('yearFilter').value;
   const selectedStatus = document.getElementById('statusFilter').value;
   
   filteredBooks = allBooks.filter(libro => {
-    // Búsqueda por texto
-    const matchesSearch = query === '' || 
-      libro.titulo.toLowerCase().includes(query) ||
-      libro.autor.toLowerCase().includes(query) ||
-      libro.editorial.toLowerCase().includes(query) ||
-      libro.genero.toLowerCase().includes(query) ||
-      (libro.tags && libro.tags.some(tag => tag.toLowerCase().includes(query)));
+    // Función helper para limpiar y buscar en texto
+    const searchInText = (text) => {
+      if (!text) return false;
+      return String(text).toLowerCase().replace(/\n/g, ' ').includes(query);
+    };
     
-    // Filtro por género
+    // Búsqueda por texto en múltiples campos
+    const matchesSearch = query === '' || 
+      searchInText(libro.titulo) ||
+      searchInText(libro.autor) ||
+      searchInText(libro.editorial) ||
+      searchInText(libro.genero) ||
+      searchInText(libro.isbn) ||
+      searchInText(libro.codigo) ||
+      searchInText(libro.ubicacion) ||
+      searchInText(libro.categoria) ||
+      (libro.tags && libro.tags.some(tag => searchInText(tag))) ||
+      (libro.descripcion && searchInText(libro.descripcion));
+    
+    // Filtro por género/materia
     const matchesGenre = selectedGenre === '' || libro.genero === selectedGenre;
     
     // Filtro por editorial
     const matchesEditorial = selectedEditorial === '' || libro.editorial === selectedEditorial;
     
     // Filtro por año
-    const matchesYear = selectedYear === '' || libro.año.toString() === selectedYear;
+    const matchesYear = selectedYear === '' || 
+      (libro.año && libro.año.toString() === selectedYear);
     
     // Filtro por estado
     const matchesStatus = selectedStatus === '' || libro.estado === selectedStatus;
     
     return matchesSearch && matchesGenre && matchesEditorial && matchesYear && matchesStatus;
   });
+  
+  // Resetear paginación cuando se aplican filtros
+  currentPage = 1;
   
   displayBooks(filteredBooks);
   
@@ -560,8 +634,8 @@ function applyFilters() {
   } else if (filteredBooks.length === 0) {
     // Hay filtros pero no resultados
     updateSearchResults(0, 'no-results');
-  } else if (filteredBooks.length === allBooks.length) {
-    // Mostrando todos los libros (por ejemplo, búsqueda muy general)
+  } else if (filteredBooks.length === allBooks.length && query === '') {
+    // Mostrando todos los libros (filtros que incluyen todo)
     updateSearchResults(filteredBooks.length, 'total');
   } else {
     // Mostrando resultados filtrados
@@ -705,29 +779,49 @@ function showSuggestions(query, container) {
 // Generar sugerencias inteligentes
 function generateSuggestions(query) {
   const suggestions = [];
-  const maxSuggestions = 6;
+  const maxSuggestions = 8;
+  const lowerQuery = query.toLowerCase();
+  
+  // Función helper para limpiar texto y buscar
+  const cleanAndMatch = (text, query) => {
+    if (!text) return false;
+    return String(text).toLowerCase().replace(/\n/g, ' ').includes(query);
+  };
+  
+  // Función para resaltar coincidencias
+  const safeHighlight = (text, query) => {
+    if (!text) return '';
+    const cleanText = String(text).replace(/\n/g, ' ').trim();
+    return highlightMatch(cleanText, query);
+  };
   
   // Búsqueda por título
   allBooks.forEach(book => {
-    if (book.titulo.toLowerCase().includes(query)) {
+    if (cleanAndMatch(book.titulo, lowerQuery)) {
       suggestions.push({
-        query: book.titulo,
-        display: `<strong>${highlightMatch(book.titulo, query)}</strong>`,
+        query: book.titulo.replace(/\n/g, ' ').trim(),
+        display: `<strong>${safeHighlight(book.titulo, lowerQuery)}</strong>`,
         type: 'title',
-        typeText: `por ${book.autor}`,
+        typeText: `por ${book.autor ? book.autor.replace(/\n/g, ' ').trim() : 'Autor desconocido'}`,
         icon: '📖'
       });
     }
   });
   
   // Búsqueda por autor
-  const authors = [...new Set(allBooks.map(book => book.autor))];
+  const authors = [...new Set(allBooks
+    .map(book => book.autor ? book.autor.replace(/\n/g, ' ').trim() : 'Autor desconocido')
+    .filter(Boolean)
+  )];
+  
   authors.forEach(author => {
-    if (author.toLowerCase().includes(query)) {
-      const bookCount = allBooks.filter(book => book.autor === author).length;
+    if (cleanAndMatch(author, lowerQuery)) {
+      const bookCount = allBooks.filter(book => 
+        book.autor && cleanAndMatch(book.autor, author.toLowerCase())
+      ).length;
       suggestions.push({
         query: author,
-        display: `<strong>${highlightMatch(author, query)}</strong>`,
+        display: `<strong>${safeHighlight(author, lowerQuery)}</strong>`,
         type: 'author',
         typeText: `${bookCount} libro${bookCount > 1 ? 's' : ''}`,
         icon: '👤'
@@ -735,17 +829,58 @@ function generateSuggestions(query) {
     }
   });
   
-  // Búsqueda por género
-  const genres = [...new Set(allBooks.map(book => book.genero))];
-  genres.forEach(genre => {
-    if (genre.toLowerCase().includes(query)) {
-      const bookCount = allBooks.filter(book => book.genero === genre).length;
+  // Búsqueda por materia/género
+  const materias = [...new Set(allBooks
+    .map(book => book.genero ? book.genero.replace(/\n/g, ' ').trim() : null)
+    .filter(Boolean)
+  )];
+  
+  materias.forEach(materia => {
+    if (cleanAndMatch(materia, lowerQuery)) {
+      const bookCount = allBooks.filter(book => 
+        book.genero && cleanAndMatch(book.genero, materia.toLowerCase())
+      ).length;
       suggestions.push({
-        query: genre,
-        display: `<strong>${highlightMatch(genre, query)}</strong>`,
-        type: 'genre',
+        query: materia,
+        display: `<strong>${safeHighlight(materia, lowerQuery)}</strong>`,
+        type: 'subject',
         typeText: `${bookCount} libro${bookCount > 1 ? 's' : ''}`,
-        icon: '📚'
+        icon: '📂'
+      });
+    }
+  });
+  
+  // Búsqueda por editorial
+  const editoriales = [...new Set(allBooks
+    .map(book => book.editorial ? book.editorial.replace(/\n/g, ' ').trim() : null)
+    .filter(Boolean)
+  )];
+  
+  editoriales.forEach(editorial => {
+    if (cleanAndMatch(editorial, lowerQuery)) {
+      const bookCount = allBooks.filter(book => 
+        book.editorial && cleanAndMatch(book.editorial, editorial.toLowerCase())
+      ).length;
+      suggestions.push({
+        query: editorial,
+        display: `<strong>${safeHighlight(editorial, lowerQuery)}</strong>`,
+        type: 'publisher',
+        typeText: `${bookCount} libro${bookCount > 1 ? 's' : ''}`,
+        icon: '🏢'
+      });
+    }
+  });
+  
+  // Búsqueda por código/ISBN
+  allBooks.forEach(book => {
+    if ((book.codigo && cleanAndMatch(book.codigo, lowerQuery)) || 
+        (book.isbn && cleanAndMatch(book.isbn, lowerQuery))) {
+      suggestions.push({
+        query: book.codigo || book.isbn || book.id,
+        display: `<strong>${safeHighlight(book.codigo || book.isbn || book.id, lowerQuery)}</strong>`,
+        type: 'code',
+        typeText: `${book.titulo ? book.titulo.replace(/\n/g, ' ').trim().substring(0, 30) + '...' : 'Sin título'}`,
+        icon: '�'
       });
     }
   });
@@ -821,9 +956,41 @@ function updateSelection(current, next) {
   if (next) next.classList.add('selected');
 }
 
-// Función para mostrar detalles del libro (placeholder)
-function openBookDetails(title, author) {
-  alert(`Detalles del libro:\n\nTítulo: ${title}\nAutor: ${author}\n\n¡Próximamente más funcionalidades!`);
+// Función para mostrar detalles del libro (actualizada)
+function openBookDetails(bookId) {
+  const libro = allBooks.find(book => book.id === bookId);
+  
+  if (!libro) {
+    alert('❌ No se encontraron detalles para este libro.');
+    return;
+  }
+  
+  const detalles = `
+📚 DETALLES DEL LIBRO
+
+📖 Título: ${libro.titulo || 'Sin título'}
+👤 Autor: ${libro.autor || 'Autor desconocido'}
+🏢 Editorial: ${libro.editorial || 'Editorial desconocida'}
+📅 Año: ${libro.año && libro.año > 0 ? libro.año : 'No especificado'}
+📂 Materia: ${libro.genero || 'Sin clasificar'}
+📍 Ubicación: ${libro.ubicacion || 'No especificada'}
+🔍 Código: ${libro.codigo || libro.id || 'N/A'}
+${libro.isbn ? `📚 ISBN: ${libro.isbn}` : ''}
+${libro.edicion ? `📄 Edición: ${libro.edicion}` : ''}
+${libro.cantidad ? `📊 Cantidad: ${libro.cantidad}` : ''}
+
+📝 Descripción: ${libro.descripcion || 'Sin descripción disponible'}
+
+🎯 Estado: ${libro.estado === 'disponible' ? '✅ Disponible' : 
+             libro.estado === 'prestado' ? '📤 Prestado' : 
+             libro.estado === 'reservado' ? '📋 Reservado' : '❓ No definido'}
+
+${libro.fechaAdquisicion ? `📆 Fecha de adquisición: ${libro.fechaAdquisicion}` : ''}
+
+¡Próximamente más funcionalidades!
+  `.trim();
+  
+  alert(detalles);
 }
 
 // Navegación suave
@@ -864,6 +1031,54 @@ function setupPlanner5DPreview() {
   }
 }
 
+// Inicializar controles de paginación
+function initPaginationControls() {
+  // Event listeners para botones de navegación
+  const prevBtn = document.getElementById('prevPage');
+  const nextBtn = document.getElementById('nextPage');
+  const firstBtn = document.getElementById('firstPage');
+  const lastBtn = document.getElementById('lastPage');
+  const itemsSelect = document.getElementById('itemsPerPage');
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', goToPrevPage);
+  }
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', goToNextPage);
+  }
+  
+  if (firstBtn) {
+    firstBtn.addEventListener('click', goToFirstPage);
+  }
+  
+  if (lastBtn) {
+    lastBtn.addEventListener('click', goToLastPage);
+  }
+  
+  if (itemsSelect) {
+    itemsSelect.addEventListener('change', function() {
+      changeItemsPerPage(this.value);
+    });
+  }
+  
+  // Navegación con teclado (flechas izquierda/derecha para cambiar páginas)
+  document.addEventListener('keydown', function(e) {
+    // Solo si no estamos escribiendo en un input
+    if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'SELECT') {
+      return;
+    }
+    
+    if (e.key === 'ArrowLeft' && currentPage > 1) {
+      e.preventDefault();
+      goToPrevPage();
+    } else if (e.key === 'ArrowRight' && currentPage < totalPages) {
+      e.preventDefault();
+      goToNextPage();
+    }
+  });
+}
+
 // Inicialización cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
   // Cargar libros desde JSON
@@ -874,6 +1089,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Inicializar búsqueda rápida del navbar
   initQuickSearch();
+  
+  // Inicializar controles de paginación
+  initPaginationControls();
   
   // Otras funcionalidades
   initSmoothScroll();

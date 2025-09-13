@@ -147,6 +147,31 @@
           <div class="books-grid" id="booksGrid">
             <div class="loading">Cargando libros...</div>
           </div>
+          
+          <!-- Sistema de paginación -->
+          <div class="pagination-container" id="paginationContainer" style="display: none;">
+            <div class="pagination-info">
+              <span id="paginationInfo">Mostrando 1-20 de 3000 libros</span>
+            </div>
+            <div class="pagination-controls">
+              <button id="firstPage" class="pagination-btn" title="Primera página">⏮️</button>
+              <button id="prevPage" class="pagination-btn" title="Página anterior">⬅️</button>
+              <div class="page-numbers" id="pageNumbers">
+                <!-- Los números de página se generan dinámicamente -->
+              </div>
+              <button id="nextPage" class="pagination-btn" title="Página siguiente">➡️</button>
+              <button id="lastPage" class="pagination-btn" title="Última página">⏭️</button>
+            </div>
+            <div class="items-per-page">
+              <label for="itemsPerPage">Libros por página:</label>
+              <select id="itemsPerPage">
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+          </div>
         </div>
       </section>
     </main>
