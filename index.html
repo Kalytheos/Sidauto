@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIDAUTO BIBLIOTECA - Biblioteca Comunitaria</title>
+    
+    <!-- Favicons para máxima compatibilidad -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/libro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/libro.png">
+    <link rel="shortcut icon" href="assets/libro.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/libro.png">
+    
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <h1 class="nav-logo">SIDAUTO BIBLIOTECA</h1>
+          
+          <!-- Barra de búsqueda rápida -->
+          <div class="quick-search">
+            <input type="text" id="quickSearchInput" placeholder="Buscar libros...">
+          </div>
+          
+          <!-- Botones de acción -->
+          <div class="nav-links">
+            <a href="#" id="alquilarBtn" class="nav-link">
+              Alquilar
+            </a>
+            <a href="#" id="adminPanelBtn" class="nav-link" title="Panel Administradores">
+              Admin
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Sección Hero -->
+      <section id="inicio" class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">SIDAUTO BIBLIOTECA</h1>
+          <p class="hero-subtitle">Tu espacio de conocimiento y aprendizaje en el corazón de Bogotá</p>
+          <div class="hero-info">
+            <div class="location">
+              <h3>📍 Nuestra Ubicación</h3>
+              <p>Calle 93 # 89a-27 Plan<br>Bogotá, Cundinamarca</p>
+            </div>
+            <div class="description">
+              <p>Descubre un mundo de posibilidades en nuestra biblioteca comunitaria. Ofrecemos un espacio acogedor para el estudio, la lectura y el crecimiento personal. Con una amplia colección de libros y recursos digitales, SIDAUTO BIBLIOTECA es tu puerta de entrada al conocimiento.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección de Botones de Navegación -->
+      <section class="navigation-section">
+        <div class="navigation-buttons">
+          <!-- Botón Conoce Nuestro Espacio -->
+          <a href="espacios.html" class="nav-button" id="espaciosBtn">
+            <div class="nav-button-content">
+              <h3 class="nav-button-title">Conoce Nuestro Espacio</h3>
+            </div>
+          </a>
+          
+          <!-- Botón Biblioteca Virtual -->
+          <a href="biblioteca.html" class="nav-button" id="bibliotecaBtn">
+            <div class="nav-button-content">
+              <h3 class="nav-button-title">Biblioteca Virtual</h3>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 SIDAUTO BIBLIOTECA. Un espacio para el conocimiento y la comunidad.</p>
+      </div>
+    </footer>
+
+    <!-- Modal de Alquiler -->
+    <div id="alquilarModal" class="rental-modal">
+      <div class="modal-content rental-content">
+        <div class="modal-header">
+          <div class="modal-icon">📚</div>
+          <h2>Solicitud de Préstamo</h2>
+          <button class="modal-close" onclick="closeRentalModal()">&times;</button>
+        </div>
+        
+        <form id="rentalForm" class="rental-form">
+          <div class="form-section">
+            <h3><br>📖 Seleccionar Libro</h3>
+            <div class="book-search-container">
+              <input type="text" id="rentalBookSearch" placeholder="Buscar libro por título, autor, código...">
+              <input type="hidden" id="selectedBookId" name="selectedBookId" required>
+              <div id="rentalBookSuggestions" class="rental-suggestions"></div>
+            </div>
+            <div id="selectedBookInfo" class="selected-book-info" style="display: none;">
+              <div class="selected-book-card">
+                <span class="selected-book-title"></span>
+                <button type="button" class="remove-selection" onclick="clearBookSelection()">✕</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h3>Datos del Solicitante</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="rentalUsuario">Usuario:</label>
+                <input type="text" id="rentalUsuario" name="usuario" required>
+              </div>
+              <div class="form-group">
+                <label for="rentalCedula">Cédula:</label>
+                <input type="text" id="rentalCedula" name="cedula" required>
+              </div>
+              <div class="form-group">
+                <label for="rentalTelefono">Teléfono:</label>
+                <input type="tel" id="rentalTelefono" name="telefono" required>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" onclick="closeRentalModal()">Cancelar</button>
+            <button type="submit" class="btn-submit">Enviar Solicitud</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal de Login Administrador -->
+    <div id="adminLoginModal" class="rental-modal">
+      <div class="modal-content admin-login-content">
+        <div class="modal-header">
+          <h2>Panel de Administradores</h2>
+          <button class="modal-close" onclick="closeAdminLoginModal()">&times;</button>
+        </div>
+        
+        <form id="adminLoginForm" class="admin-login-form">
+          <div class="form-section">
+            <h3><br>🔐 Iniciar Sesión</h3>
+            
+            <!-- Área de mensajes de estado -->
+            <div id="adminLoginStatus" class="admin-login-status" style="display: none;">
+              <div class="status-content">
+                <span class="status-icon"></span>
+                <span class="status-message"></span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="adminUsuario">Usuario:</label>
+              <input type="text" id="adminUsuario" name="usuario" required autocomplete="username">
+            </div>
+            <div class="form-group">
+              <label for="adminContrasena">Contraseña:</label>
+              <input type="password" id="adminContrasena" name="contrasena" required autocomplete="current-password">
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" onclick="closeAdminLoginModal()">Cancelar</button>
+            <button type="submit" class="btn-submit">Iniciar Sesión</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

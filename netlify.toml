@@ -1,0 +1,15 @@
+[build][build]
+
+  publish = "."  publish = "."
+
+
+
+[[headers]][[headers]]
+
+  for = "/*"  for = "/*"
+
+  [headers.values]  [headers.values]
+
+    X-Frame-Options = "DENY"    X-Frame-Options = "DENY"
+
+    X-Content-Type-Options = "nosniff"    X-Content-Type-Options = "nosniff"

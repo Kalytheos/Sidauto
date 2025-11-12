@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Virtual - SIDAUTO BIBLIOTECA</title>
+    
+    <!-- Favicons para máxima compatibilidad -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/libro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/libro.png">
+    <link rel="shortcut icon" href="assets/libro.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/libro.png">
+    
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <a href="index.html" class="nav-logo">SIDAUTO BIBLIOTECA</a>
+          
+          <!-- Barra de búsqueda rápida -->
+          <div class="quick-search">
+            <input type="text" id="quickSearchInput" placeholder="Buscar libros...">
+          </div>
+          
+          <!-- Navegación entre páginas -->
+          <div class="nav-links">
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="espacios.html" class="nav-link">Nuestro Espacio</a>
+            
+            <!-- Botones de acción -->
+            <a href="#" id="alquilarBtn" class="nav-link">
+              Alquilar
+            </a>
+            <a href="#" id="adminPanelBtn" class="nav-link" title="Panel Administradores">
+              Admin
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Sección Hero -->
+      <section class="biblioteca-hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Biblioteca Virtual</h1>
+          <p class="hero-subtitle">Explora nuestra colección digital de libros</p>
+        </div>
+      </section>
+
+      <!-- Sección Biblioteca Virtual -->
+      <section id="biblioteca" class="library-section">
+        <div class="container">
+          <h2>Catálogo de Libros</h2>
+          <p>Encuentra el libro perfecto para ti en nuestra extensa colección</p>
+          
+          <!-- Sistema de Búsqueda -->
+          <div class="search-system">
+            <div class="search-bar">
+              <input type="text" id="searchInput" placeholder="Buscar libros por título, autor, editorial..." />
+              <button id="clearSearch" class="clear-btn">✕</button>
+            </div>
+            
+            <!-- Filtros -->
+            <div class="filters">
+              <div class="filter-group">
+                <label for="genreFilter">Género:</label>
+                <select id="genreFilter">
+                  <option value="">Todos los géneros</option>
+                </select>
+              </div>
+              
+              <div class="filter-group">
+                <label for="editorialFilter">Editorial:</label>
+                <select id="editorialFilter">
+                  <option value="">Todas las editoriales</option>
+                </select>
+              </div>
+              
+              <div class="filter-group">
+                <label for="yearFilter">Año:</label>
+                <select id="yearFilter">
+                  <option value="">Todos los años</option>
+                </select>
+              </div>
+              
+              <div class="filter-group">
+                <label for="statusFilter">Estado:</label>
+                <select id="statusFilter">
+                  <option value="">Todos</option>
+                  <option value="disponible">Disponible</option>
+                  <option value="prestado">Prestado</option>
+                  <option value="reservado">Reservado</option>
+                </select>
+              </div>
+            </div>
+            
+            <!-- Estadísticas de búsqueda -->
+            <div class="search-stats">
+              <span id="searchResults">Utiliza la búsqueda para explorar nuestra colección</span>
+              <button id="resetFilters" class="reset-btn">Limpiar filtros</button>
+            </div>
+          </div>
+          
+          <!-- Contenedor de libros -->
+          <div class="books-grid" id="booksGrid">
+            <div class="loading">Cargando libros desde Supabase...</div>
+          </div>
+          
+          <!-- Sistema de paginación -->
+          <div class="pagination-container" id="paginationContainer" style="display: none;">
+            <div class="pagination-info">
+              <span id="paginationInfo">Mostrando 1-20 de 3000 libros</span>
+            </div>
+            <div class="pagination-controls">
+              <button id="firstPage" class="pagination-btn" title="Primera página">⏮️</button>
+              <button id="prevPage" class="pagination-btn" title="Página anterior">⬅️</button>
+              <div class="page-numbers" id="pageNumbers">
+                <!-- Los números de página se generan dinámicamente -->
+              </div>
+              <button id="nextPage" class="pagination-btn" title="Página siguiente">➡️</button>
+              <button id="lastPage" class="pagination-btn" title="Última página">⏭️</button>
+            </div>
+            <div class="items-per-page">
+              <label for="itemsPerPage">Libros por página:</label>
+              <select id="itemsPerPage">
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección de Estadísticas -->
+      <section class="stats-section">
+        <div class="container">
+          <h2>📊 Estadísticas de la Colección</h2>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-icon">📚</div>
+              <h3 id="totalBooks">-</h3>
+              <p>Total de Libros</p>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">✅</div>
+              <h3 id="availableBooks">-</h3>
+              <p>Disponibles</p>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">📖</div>
+              <h3 id="borrowedBooks">-</h3>
+              <p>Prestados</p>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">🏷️</div>
+              <h3 id="totalGenres">-</h3>
+              <p>Géneros Únicos</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Call to Action -->
+      <section class="cta-section">
+        <div class="container">
+          <div class="cta-content">
+            <h2>¿No encuentras lo que buscas?</h2>
+            <p>Visítanos en persona y descubre nuestra colección física completa</p>
+            <div class="cta-buttons">
+              <a href="espacios.html" class="cta-btn primary">Conocer Nuestro Espacio</a>
+              <a href="index.html" class="cta-btn secondary">Regresar al Inicio</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 SIDAUTO BIBLIOTECA. Un espacio para el conocimiento y la comunidad.</p>
+      </div>
+    </footer>
+
+    <!-- Modal de Alquiler -->
+    <div id="alquilarModal" class="rental-modal">
+      <div class="modal-content rental-content">
+        <div class="modal-header">
+          <div class="modal-icon">📚</div>
+          <h2>Solicitud de Préstamo</h2>
+          <button class="modal-close" onclick="closeRentalModal()">&times;</button>
+        </div>
+        
+        <form id="rentalForm" class="rental-form">
+          <div class="form-section">
+            <h3><br>📖 Seleccionar Libro</h3>
+            <div class="book-search-container">
+              <input type="text" id="rentalBookSearch" placeholder="Buscar libro por título, autor, código...">
+              <input type="hidden" id="selectedBookId" name="selectedBookId" required>
+              <div id="rentalBookSuggestions" class="rental-suggestions"></div>
+            </div>
+            <div id="selectedBookInfo" class="selected-book-info" style="display: none;">
+              <div class="selected-book-card">
+                <span class="selected-book-title"></span>
+                <button type="button" class="remove-selection" onclick="clearBookSelection()">✕</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h3>Datos del Solicitante</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="rentalUsuario">Usuario:</label>
+                <input type="text" id="rentalUsuario" name="usuario" required>
+              </div>
+              <div class="form-group">
+                <label for="rentalCedula">Cédula:</label>
+                <input type="text" id="rentalCedula" name="cedula" required>
+              </div>
+              <div class="form-group">
+                <label for="rentalTelefono">Teléfono:</label>
+                <input type="tel" id="rentalTelefono" name="telefono" required>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" onclick="closeRentalModal()">Cancelar</button>
+            <button type="submit" class="btn-submit">Enviar Solicitud</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal de Login Administrador -->
+    <div id="adminLoginModal" class="rental-modal">
+      <div class="modal-content admin-login-content">
+        <div class="modal-header">
+          <h2>Panel de Administradores</h2>
+          <button class="modal-close" onclick="closeAdminLoginModal()">&times;</button>
+        </div>
+        
+        <form id="adminLoginForm" class="admin-login-form">
+          <div class="form-section">
+            <h3><br>🔐 Iniciar Sesión</h3>
+            <div class="form-group">
+              <label for="adminUsuario">Usuario:</label>
+              <input type="text" id="adminUsuario" name="usuario" required autocomplete="username">
+            </div>
+            <div class="form-group">
+              <label for="adminContrasena">Contraseña:</label>
+              <input type="password" id="adminContrasena" name="contrasena" required autocomplete="current-password">
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" onclick="closeAdminLoginModal()">Cancelar</button>
+            <button type="submit" class="btn-submit">Iniciar Sesión</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
