@@ -1514,7 +1514,7 @@ footer p {
   position: absolute;
   left: 30px;
   top: 0;
-  bottom: 0;
+  height: calc(100% - 150px);
   width: 3px;
   background: linear-gradient(to bottom, #3498db, #2c3e50);
   border-radius: 2px;
@@ -1524,6 +1524,7 @@ footer p {
   display: flex;
   margin-bottom: 50px;
   position: relative;
+  align-items: center;
 }
 
 .timeline-marker {
