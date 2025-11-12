@@ -2156,8 +2156,9 @@ async function handleRentalSubmit(e) {
   const usuario = formData.get('usuario').trim();
   const cedula = formData.get('cedula').trim();
   const telefono = formData.get('telefono').trim();
+  const correo = formData.get('correo').trim();
   
-  if (!usuario || !cedula || !telefono) {
+  if (!usuario || !cedula || !telefono || !correo) {
     showNotification('warning', 'Campos incompletos', 'Por favor completa todos los campos del formulario.');
     return;
   }
@@ -2165,6 +2166,13 @@ async function handleRentalSubmit(e) {
   // Validar cédula (básico)
   if (cedula.length < 7 || cedula.length > 20) {
     showNotification('warning', 'Cédula inválida', 'Por favor ingresa una cédula válida (7-20 dígitos).');
+    return;
+  }
+  
+  // Validar correo electrónico
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(correo)) {
+    showNotification('warning', 'Correo inválido', 'Por favor ingresa un correo electrónico válido.');
     return;
   }
   
@@ -2187,6 +2195,7 @@ async function handleRentalSubmit(e) {
           usuario: usuario,
           cedula: cedula,
           telefono: telefono,
+          correo: correo,
           tipo_usuario: 'cliente'
         }
       ])
