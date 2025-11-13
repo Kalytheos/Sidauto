@@ -1043,7 +1043,7 @@ footer p {
   background: linear-gradient(135deg, #3498db, #2c3e50);
   color: white;
   border: none;
-  padding: 8px 16px
+  padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
