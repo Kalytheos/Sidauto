@@ -281,6 +281,247 @@
         margin-bottom: 20px;
         opacity: 0.5;
       }
+
+      /* === ESTILOS PARA GESTIÓN DE LIBROS === */
+      .view-btn {
+        padding: 10px 20px;
+        border: none;
+        background: transparent;
+        color: #6c757d;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .view-btn.active {
+        color: #e67e22;
+        border-bottom-color: #e67e22;
+      }
+
+      .view-btn:hover {
+        color: #e67e22;
+      }
+
+      .books-crud-header {
+        padding: 20px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .search-bar {
+        display: flex;
+        gap: 10px;
+        max-width: 600px;
+      }
+
+      .search-bar input {
+        flex: 1;
+        padding: 12px 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 0.95rem;
+      }
+
+      .search-bar input:focus {
+        outline: none;
+        border-color: #e67e22;
+      }
+
+      .search-btn {
+        padding: 12px 25px;
+        background: #e67e22;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .search-btn:hover {
+        background: #d35400;
+        transform: translateY(-1px);
+      }
+
+      .books-table-container {
+        overflow-x: auto;
+        padding: 20px;
+      }
+
+      .books-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .books-table th {
+        background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.9rem;
+        white-space: nowrap;
+      }
+
+      .books-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #e9ecef;
+        font-size: 0.9rem;
+      }
+
+      .books-table tbody tr:hover {
+        background: #f8f9fa;
+      }
+
+      .books-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .book-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn-edit, .btn-delete, .btn-view {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-edit {
+        background: #3498db;
+        color: white;
+      }
+
+      .btn-edit:hover {
+        background: #2980b9;
+      }
+
+      .btn-delete {
+        background: #e74c3c;
+        color: white;
+      }
+
+      .btn-delete:hover {
+        background: #c0392b;
+      }
+
+      .btn-view {
+        background: #95a5a6;
+        color: white;
+      }
+
+      .btn-view:hover {
+        background: #7f8c8d;
+      }
+
+      .books-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        padding: 20px;
+        background: #f8f9fa;
+      }
+
+      .books-pagination span {
+        font-weight: 500;
+        color: #2c3e50;
+      }
+
+      /* === ESTILOS DEL FORMULARIO DE EDICIÓN === */
+      .edit-book-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group label {
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #2c3e50;
+        font-size: 0.9rem;
+      }
+
+      .form-group input,
+      .form-group select {
+        padding: 10px 12px;
+        border: 2px solid #e9ecef;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #e67e22;
+      }
+
+      .form-group input[readonly] {
+        background: #f8f9fa;
+        cursor: not-allowed;
+      }
+
+      .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .btn-cancel {
+        padding: 10px 25px;
+        background: #95a5a6;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-cancel:hover {
+        background: #7f8c8d;
+      }
+
+      .btn-save {
+        padding: 10px 25px;
+        background: #27ae60;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-save:hover {
+        background: #229954;
+      }
       
       @media (max-width: 768px) {
         .admin-container {
@@ -320,6 +561,54 @@
         backdrop-filter: blur(5px);
         align-items: center;
         justify-content: center;
+      }
+
+      .modal-content {
+        background: white;
+        margin: 20px;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-header {
+        background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
+        color: white;
+        padding: 20px 30px;
+        border-radius: 15px 15px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+
+      .close {
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+        background: rgba(255,255,255,0.2);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s ease;
+      }
+
+      .close:hover {
+        background: rgba(255,255,255,0.3);
+      }
+
+      .modal-body {
+        padding: 30px;
       }
       
       .book-details-content {
@@ -599,6 +888,22 @@
         <div class="admin-content">
           <div class="admin-toolbar">
             <div class="filter-buttons">
+              <button class="view-btn active" data-view="requests">
+                📋 Solicitudes
+              </button>
+              <button class="view-btn" data-view="books">
+                📚 Gestión de Libros
+              </button>
+            </div>
+            
+            <button class="logout-btn" onclick="logoutAdmin()">
+              Cerrar Sesión
+            </button>
+          </div>
+
+          <!-- Vista de Solicitudes -->
+          <div id="requestsView" class="admin-view">
+            <div class="filter-buttons" style="padding: 20px; background: #f8f9fa; border-bottom: 1px solid #e9ecef;">
               <button class="filter-btn active" data-filter="all">
                 📚 Todos
               </button>
@@ -608,22 +913,163 @@
               <button class="filter-btn" data-filter="PRESTADO">
                 Prestados
               </button>
-              <!--<button class="filter-btn" data-filter="OCUPADO">
-                Ocupados
-              </button>-->
             </div>
             
-            <button class="logout-btn" onclick="logoutAdmin()">
-              Cerrar Sesión
-            </button>
+            <div class="requests-grid" id="requestsContainer">
+              <!-- Aquí se cargarán las solicitudes dinámicamente -->
+            </div>
           </div>
-          
-          <div class="requests-grid" id="requestsContainer">
-            <!-- Aquí se cargarán las solicitudes dinámicamente -->
+
+          <!-- Vista de Gestión de Libros -->
+          <div id="booksView" class="admin-view" style="display: none;">
+            <div class="books-crud-header">
+              <div class="search-bar">
+                <input type="text" id="bookSearchInput" placeholder="Buscar por título, autor, ISBN, código...">
+                <button onclick="searchBooks()" class="search-btn">🔍 Buscar</button>
+              </div>
+            </div>
+            
+            <div class="books-table-container">
+              <table class="books-table" id="booksTable">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Código</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Editorial</th>
+                    <th>Año</th>
+                    <th>Cantidad</th>
+                    <th>Disponibilidad</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="booksTableBody">
+                  <!-- Los libros se cargarán aquí -->
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="books-pagination">
+              <button onclick="changeBooksPage('first')" id="booksFirstPage" class="pagination-btn">
+                <img src="assets/flechas/all_back.png" alt="Primera" style="width: 20px; height: 20px;">
+              </button>
+              <button onclick="changeBooksPage('prev')" id="booksPrevPage" class="pagination-btn">
+                <img src="assets/flechas/back.png" alt="Anterior" style="width: 20px; height: 20px;">
+              </button>
+              <span id="booksPaginationInfo">Página 1 de 1</span>
+              <button onclick="changeBooksPage('next')" id="booksNextPage" class="pagination-btn">
+                <img src="assets/flechas/back.png" alt="Siguiente" style="width: 20px; height: 20px; transform: scaleX(-1);">
+              </button>
+              <button onclick="changeBooksPage('last')" id="booksLastPage" class="pagination-btn">
+                <img src="assets/flechas/all_back.png" alt="Última" style="width: 20px; height: 20px; transform: scaleX(-1);">
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </main>
+
+    <!-- Modal de Edición de Libro -->
+    <div id="editBookModal" class="modal">
+      <div class="modal-content" style="max-width: 800px;">
+        <div class="modal-header">
+          <h2>✏️ Editar Libro</h2>
+          <span class="close" onclick="closeEditBookModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+          <form id="editBookForm" class="edit-book-form">
+            <input type="hidden" id="editBookId">
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label>Número:</label>
+                <input type="text" id="editBookNo" readonly>
+              </div>
+              <div class="form-group">
+                <label>Código:</label>
+                <input type="text" id="editBookCodigo" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Título:</label>
+              <input type="text" id="editBookTitulo" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Autor:</label>
+                <input type="text" id="editBookAutor" required>
+              </div>
+              <div class="form-group">
+                <label>Editorial:</label>
+                <input type="text" id="editBookEditorial">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>ISBN:</label>
+                <input type="text" id="editBookISBN">
+              </div>
+              <div class="form-group">
+                <label>Año de Publicación:</label>
+                <input type="text" id="editBookAnio">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Número de Edición:</label>
+                <input type="text" id="editBookEdicion">
+              </div>
+              <div class="form-group">
+                <label>Materia:</label>
+                <input type="text" id="editBookMateria">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Ubicación:</label>
+                <input type="text" id="editBookUbicacion">
+              </div>
+              <div class="form-group">
+                <label>Cantidad:</label>
+                <input type="number" id="editBookCantidad" min="0" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Disponibilidad:</label>
+              <select id="editBookDisponibilidad" required>
+                <option value="DISPONIBLE">DISPONIBLE</option>
+                <option value="PENDIENTE">PENDIENTE</option>
+                <option value="PRESTADO">PRESTADO</option>
+                <option value="OCUPADO">OCUPADO</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Fecha de Adquisición:</label>
+                <input type="date" id="editBookFechaAdquisicion">
+              </div>
+              <div class="form-group">
+                <label>Fecha de Creación:</label>
+                <input type="date" id="editBookFechaCreacion" readonly>
+              </div>
+            </div>
+
+            <div class="modal-actions">
+              <button type="button" class="btn-cancel" onclick="closeEditBookModal()">Cancelar</button>
+              <button type="submit" class="btn-save">💾 Guardar Cambios</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <footer>
       <div class="container">
@@ -1158,6 +1604,310 @@
           localStorage.removeItem('sidauto_admin');
           alert('👋 Sesión cerrada correctamente.');
           window.location.href = 'index.html';
+        }
+      }
+
+      // ========== GESTIÓN DE LIBROS ==========
+      let currentBooksPage = 1;
+      const booksPerPage = 20;
+      let totalBooksCount = 0;
+      let adminAllBooks = [];
+      let adminFilteredBooks = [];
+
+      // Cambiar entre vistas
+      document.addEventListener('DOMContentLoaded', function() {
+        const viewBtns = document.querySelectorAll('.view-btn');
+        viewBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const view = this.dataset.view;
+            
+            // Actualizar botones activos
+            viewBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Mostrar vista correspondiente
+            if (view === 'requests') {
+              document.getElementById('requestsView').style.display = 'block';
+              document.getElementById('booksView').style.display = 'none';
+            } else if (view === 'books') {
+              document.getElementById('requestsView').style.display = 'none';
+              document.getElementById('booksView').style.display = 'block';
+              loadAllBooks();
+            }
+          });
+        });
+      });
+
+      // Cargar todos los libros
+      async function loadAllBooks() {
+        try {
+          console.log('📚 Cargando todos los libros para admin...');
+          
+          const { data, error, count } = await supabase
+            .from('libros')
+            .select('*', { count: 'exact' });
+          
+          if (error) throw error;
+          
+          // Ordenar por número de forma numérica
+          adminAllBooks = (data || []).sort((a, b) => {
+            const numA = parseInt(a.No) || 0;
+            const numB = parseInt(b.No) || 0;
+            return numA - numB;
+          });
+          
+          adminFilteredBooks = [...adminAllBooks];
+          totalBooksCount = count || adminAllBooks.length;
+          
+          console.log(`✅ ${totalBooksCount} libros cargados para admin`);
+          
+          currentBooksPage = 1;
+          displayBooks();
+        } catch (error) {
+          console.error('❌ Error cargando libros:', error);
+          alert('Error al cargar los libros: ' + error.message);
+        }
+      }
+
+      // Mostrar libros en la tabla
+      function displayBooks() {
+        const tbody = document.getElementById('booksTableBody');
+        const startIndex = (currentBooksPage - 1) * booksPerPage;
+        const endIndex = startIndex + booksPerPage;
+        const booksToShow = adminFilteredBooks.slice(startIndex, endIndex);
+        
+        if (booksToShow.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 40px;">No se encontraron libros</td></tr>';
+          return;
+        }
+        
+        tbody.innerHTML = booksToShow.map(book => `
+          <tr>
+            <td>${book.No || ''}</td>
+            <td>${book['CÓDIGO'] || ''}</td>
+            <td style="max-width: 250px;">${book.TITULO || ''}</td>
+            <td>${book.AUTOR || ''}</td>
+            <td>${book.EDITORIAL || ''}</td>
+            <td>${book['AÑO DE PUBLICACIÓN'] || ''}</td>
+            <td>${book.CANTIDAD || 0}</td>
+            <td>
+              <span class="status-badge status-${(book.disponibilidad || 'DISPONIBLE').toLowerCase()}">
+                ${book.disponibilidad || 'DISPONIBLE'}
+              </span>
+            </td>
+            <td>
+              <div class="book-actions">
+                <button class="btn-edit" onclick="openEditBookModal(${book.id})" title="Editar">✏️</button>
+                <button class="btn-delete" onclick="deleteBook(${book.id})" title="Eliminar">🗑️</button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+        
+        updateBooksPagination();
+      }
+
+      // Actualizar paginación
+      function updateBooksPagination() {
+        const totalPages = Math.ceil(adminFilteredBooks.length / booksPerPage);
+        document.getElementById('booksPaginationInfo').textContent = 
+          `Página ${currentBooksPage} de ${totalPages} (${adminFilteredBooks.length} libros)`;
+        
+        document.getElementById('booksFirstPage').disabled = currentBooksPage === 1;
+        document.getElementById('booksPrevPage').disabled = currentBooksPage === 1;
+        document.getElementById('booksNextPage').disabled = currentBooksPage === totalPages;
+        document.getElementById('booksLastPage').disabled = currentBooksPage === totalPages;
+      }
+
+      // Cambiar página
+      function changeBooksPage(action) {
+        const totalPages = Math.ceil(adminFilteredBooks.length / booksPerPage);
+        
+        switch(action) {
+          case 'first':
+            currentBooksPage = 1;
+            break;
+          case 'prev':
+            if (currentBooksPage > 1) currentBooksPage--;
+            break;
+          case 'next':
+            if (currentBooksPage < totalPages) currentBooksPage++;
+            break;
+          case 'last':
+            currentBooksPage = totalPages;
+            break;
+        }
+        
+        displayBooks();
+      }
+
+      // Buscar libros
+      function searchBooks() {
+        const searchTerm = document.getElementById('bookSearchInput').value.toLowerCase().trim();
+        
+        if (!searchTerm) {
+          adminFilteredBooks = [...adminAllBooks];
+        } else {
+          adminFilteredBooks = adminAllBooks.filter(book => {
+            return (
+              (book.TITULO && book.TITULO.toLowerCase().includes(searchTerm)) ||
+              (book.AUTOR && book.AUTOR.toLowerCase().includes(searchTerm)) ||
+              (book.ISBN && book.ISBN.toLowerCase().includes(searchTerm)) ||
+              (book['CÓDIGO'] && book['CÓDIGO'].toLowerCase().includes(searchTerm)) ||
+              (book.EDITORIAL && book.EDITORIAL.toLowerCase().includes(searchTerm)) ||
+              (book.MATERIA && book.MATERIA.toLowerCase().includes(searchTerm))
+            );
+          });
+        }
+        
+        currentBooksPage = 1;
+        displayBooks();
+      }
+
+      // Buscar al presionar Enter
+      document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('bookSearchInput');
+        if (searchInput) {
+          searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              searchBooks();
+            }
+          });
+        }
+      });
+
+      // Abrir modal de edición
+      async function openEditBookModal(bookId) {
+        try {
+          const { data, error } = await supabase
+            .from('libros')
+            .select('*')
+            .eq('id', bookId)
+            .single();
+          
+          if (error) throw error;
+          
+          // Llenar el formulario con los datos del libro
+          document.getElementById('editBookId').value = data.id;
+          document.getElementById('editBookNo').value = data.No || '';
+          document.getElementById('editBookCodigo').value = data['CÓDIGO'] || '';
+          document.getElementById('editBookTitulo').value = data.TITULO || '';
+          document.getElementById('editBookAutor').value = data.AUTOR || '';
+          document.getElementById('editBookEditorial').value = data.EDITORIAL || '';
+          document.getElementById('editBookISBN').value = data.ISBN || '';
+          document.getElementById('editBookAnio').value = data['AÑO DE PUBLICACIÓN'] || '';
+          document.getElementById('editBookEdicion').value = data['NUMERO EDICION'] || '';
+          document.getElementById('editBookMateria').value = data.MATERIA || '';
+          document.getElementById('editBookUbicacion').value = data['UBICACIÓN '] || '';
+          document.getElementById('editBookCantidad').value = data.CANTIDAD || 0;
+          document.getElementById('editBookDisponibilidad').value = data.disponibilidad || 'DISPONIBLE';
+          
+          // Convertir fechas (nota: estos campos tienen espacios al final en la BD)
+          // Las fechas vienen en formato DD/MM/YYYY, necesitamos convertirlas a YYYY-MM-DD
+          if (data['FECHA DE ADQUISICIÓN ']) {
+            const fechaAdqStr = data['FECHA DE ADQUISICIÓN '];
+            if (fechaAdqStr && fechaAdqStr.includes('/')) {
+              const [dia, mes, anio] = fechaAdqStr.split('/');
+              document.getElementById('editBookFechaAdquisicion').value = `${anio}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
+            }
+          }
+          if (data['FECHA DE CREACIÓN']) {
+            const fechaCreacionStr = data['FECHA DE CREACIÓN'];
+            if (fechaCreacionStr && fechaCreacionStr.includes('/')) {
+              const [dia, mes, anio] = fechaCreacionStr.split('/');
+              document.getElementById('editBookFechaCreacion').value = `${anio}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
+            }
+          }
+          
+          // Mostrar modal
+          document.getElementById('editBookModal').style.display = 'flex';
+        } catch (error) {
+          console.error('❌ Error cargando libro:', error);
+          alert('Error al cargar el libro: ' + error.message);
+        }
+      }
+
+      // Cerrar modal de edición
+      function closeEditBookModal() {
+        document.getElementById('editBookModal').style.display = 'none';
+        document.getElementById('editBookForm').reset();
+      }
+
+      // Guardar cambios del libro
+      document.addEventListener('DOMContentLoaded', function() {
+        const editForm = document.getElementById('editBookForm');
+        if (editForm) {
+          editForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const bookId = document.getElementById('editBookId').value;
+            
+            const updateData = {
+              'CÓDIGO': document.getElementById('editBookCodigo').value,
+              'TITULO': document.getElementById('editBookTitulo').value,
+              'AUTOR': document.getElementById('editBookAutor').value,
+              'EDITORIAL': document.getElementById('editBookEditorial').value,
+              'ISBN': document.getElementById('editBookISBN').value,
+              'AÑO DE PUBLICACIÓN': document.getElementById('editBookAnio').value,
+              'NUMERO EDICION': document.getElementById('editBookEdicion').value,
+              'MATERIA': document.getElementById('editBookMateria').value,
+              'UBICACIÓN ': document.getElementById('editBookUbicacion').value,
+              'CANTIDAD': parseInt(document.getElementById('editBookCantidad').value) || 0,
+              'disponibilidad': document.getElementById('editBookDisponibilidad').value
+            };
+            
+            const fechaAdq = document.getElementById('editBookFechaAdquisicion').value;
+            if (fechaAdq) {
+              updateData['FECHA DE ADQUISICIÓN '] = fechaAdq;
+            }
+            
+            try {
+              const { error } = await supabase
+                .from('libros')
+                .update(updateData)
+                .eq('id', bookId);
+              
+              if (error) throw error;
+              
+              alert('✅ Libro actualizado correctamente');
+              closeEditBookModal();
+              loadAllBooks();
+            } catch (error) {
+              console.error('❌ Error actualizando libro:', error);
+              alert('Error al actualizar el libro: ' + error.message);
+            }
+          });
+        }
+      });
+
+      // Eliminar libro
+      async function deleteBook(bookId) {
+        if (!confirm('⚠️ ¿Estás seguro de que deseas eliminar este libro? Esta acción no se puede deshacer.')) {
+          return;
+        }
+        
+        try {
+          const { error } = await supabase
+            .from('libros')
+            .delete()
+            .eq('id', bookId);
+          
+          if (error) throw error;
+          
+          alert('✅ Libro eliminado correctamente');
+          loadAllBooks();
+        } catch (error) {
+          console.error('❌ Error eliminando libro:', error);
+          alert('Error al eliminar el libro: ' + error.message);
+        }
+      }
+
+      // Cerrar modal al hacer clic fuera
+      window.onclick = function(event) {
+        const editModal = document.getElementById('editBookModal');
+        if (event.target === editModal) {
+          closeEditBookModal();
         }
       }
     </script>

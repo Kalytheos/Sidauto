@@ -118,13 +118,21 @@
               <span id="paginationInfo">Mostrando 1-20 de 3000 libros</span>
             </div>
             <div class="pagination-controls">
-              <button id="firstPage" class="pagination-btn" title="Primera página">⏮️</button>
-              <button id="prevPage" class="pagination-btn" title="Página anterior">⬅️</button>
+              <button id="firstPage" class="pagination-btn" title="Primera página">
+                <img src="assets/flechas/all_back.png" alt="Primera página" style="width: 20px; height: 20px;">
+              </button>
+              <button id="prevPage" class="pagination-btn" title="Página anterior">
+                <img src="assets/flechas/back.png" alt="Página anterior" style="width: 20px; height: 20px;">
+              </button>
               <div class="page-numbers" id="pageNumbers">
                 <!-- Los números de página se generan dinámicamente -->
               </div>
-              <button id="nextPage" class="pagination-btn" title="Página siguiente">➡️</button>
-              <button id="lastPage" class="pagination-btn" title="Última página">⏭️</button>
+              <button id="nextPage" class="pagination-btn" title="Página siguiente">
+                <img src="assets/flechas/back.png" alt="Página siguiente" style="width: 20px; height: 20px; transform: scaleX(-1);">
+              </button>
+              <button id="lastPage" class="pagination-btn" title="Última página">
+                <img src="assets/flechas/all_back.png" alt="Última página" style="width: 20px; height: 20px; transform: scaleX(-1);">
+              </button>
             </div>
             <div class="items-per-page">
               <label for="itemsPerPage">Libros por página:</label>
